@@ -1,16 +1,8 @@
-#ifndef EXCEPTION_HPP_
-#define EXCEPTION_HPP_
+#include "Exception.hpp"
 
 #include <string>
-#include "Exception.h"
-using namespace std;
 
 Exception::~Exception() {}
-string * Exception::toString() {
-	return new string("default exception toString value");
+std::string * Exception::toString() {
+	return new std::string("default exception toString value");
 }
-
-#endif
-
-
-

