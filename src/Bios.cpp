@@ -7,23 +7,23 @@ Bios::Bios(Log * pLog) {
 }
 
 void Bios::read() {
-	pLog->printMessage(INFO, "starting to read BIOS code from chip");
+	pLog->logMessage(INFO, "starting to read BIOS code from chip");
 }
 
 void Bios::write() {
-	pLog->printMessage(INFO, "writing BIOS code to chip");
+	pLog->logMessage(INFO, "writing BIOS code to chip");
 }
 
 bool Bios::isInfected() {
-	pLog->printMessage(INFO, "checking whether BIOS code is infected");
-	pLog->printMessage(INFO, "BIOS code is not infected");
-	pLog->printMessage(INFO, "BIOS code is already infected");
+	pLog->logMessage(INFO, "checking whether BIOS code is infected");
+	pLog->logMessage(INFO, "BIOS code is not infected");
+	pLog->logMessage(INFO, "BIOS code is already infected");
 
 	return false;
 }
 
 void Bios::infect() {
-	pLog->printMessage(INFO, "infecting BIOS code");
+	pLog->logMessage(INFO, "infecting BIOS code");
 
 //	bool old;
 //	asm (
@@ -33,6 +33,14 @@ void Bios::infect() {
 //	        : "Ir" (Offset)
 //	        : "cc"
 //	);
+}
+
+void Bios::ensureBiosInfected() {
+	read();
+	if (!isInfected()) {
+		infect();
+		write();
+	}
 }
 
 

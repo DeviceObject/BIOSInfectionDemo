@@ -9,9 +9,9 @@ using namespace std;
 
 class Log {
 public:
-	void printMessage(LogLevel logPriorityLevel, string * message);
-	void printMessage(LogLevel logPriorityLevel, char const * message);
-	void printException(LogLevel logPriorityLevel, Exception& e);
+	void logMessage(LogLevel logPriorityLevel, string * message);
+	void logMessage(LogLevel logPriorityLevel, char const * message);
+	void logException(LogLevel logPriorityLevel, Exception& e);
 	void printEndLine();
 };
 

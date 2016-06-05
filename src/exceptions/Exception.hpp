@@ -4,8 +4,11 @@
 #include<string>
 
 class Exception {
+private:
+    std::string message;
 public:
 	virtual ~Exception();
+    void setMessage(std::string message);
 	virtual std::string * toString();
 };
 

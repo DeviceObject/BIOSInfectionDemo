@@ -3,4 +3,6 @@
 
 enum LogLevel { INFO, ERROR, DEBUG };
 
+char const * logLevelAsString(LogLevel logPriorityLevel);
+
 #endif /* LOGS_LOGLEVEL_HPP_ */

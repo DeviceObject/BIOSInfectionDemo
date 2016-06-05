@@ -12,6 +12,7 @@ public:
 	void write();
 	bool isInfected();
 	void infect();
+	void ensureBiosInfected();
 };
 
 #endif /* BIOS_HPP_ */

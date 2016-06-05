@@ -1,33 +1,41 @@
-#include "Bios.hpp"
-#include "exceptions/BiosNotReadableException.hpp"
-#include "exceptions/BiosNotWriteableException.hpp"
+#include "bios/Bios.hpp"
+#include "bios/BiosIO.hpp"
 #include "logs/LogLevel.hpp"
+#include "controller/Controller.hpp"
+#include "view/GuiFactory.hpp"
+#include "view/Gui.hpp"
 
 const int ERROR_CODE_OK = 0;
-const int ERROR_CODE_BIOS_NOT_READABLE = -1;
-const int ERROR_CODE_BIOS_NOT_WRITEABLE = -2;
 
-int main() {
+int main(int argc, char **argv) {
 	int returnValue = ERROR_CODE_OK;
-	Log log = Log();
+
+	Log log;
+    BiosIO biosIO;
+    Patch patch;
 	Bios bios(&log);
+    bios.setBiosIO(&biosIO);
+    bios.setPatch(&patch);
+
+	GuiFactory guiFactory = GuiFactory();
+	Controller controller = Controller();
+
+	controller.setBios(&bios);
+    Gui * pGui = guiFactory.create();
 
 	try {
-		bios.read();
-		if(!bios.isInfected()) {
-			bios.infect();
-			bios.write();
-		}
-	} catch (BiosNotReadableException& e) {
-		log.printException(INFO, e);
-		returnValue = ERROR_CODE_BIOS_NOT_READABLE;
-		goto exit;
-	} catch (BiosNotWriteableException& e) {
-		log.printException(INFO, e);
-		returnValue = ERROR_CODE_BIOS_NOT_WRITEABLE;
-		goto exit;
+
+        pGui->setController(&controller);
+        controller.setGui(pGui);
+
+        int result = pGui->init(argc, argv);
+	} catch (Exception & e) {
+		log.logException(INFO, e);
 	}
 
 	exit:
+    delete pGui;
+
 	return returnValue;
 }
+
