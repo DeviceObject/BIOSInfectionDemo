@@ -3,18 +3,24 @@
 #include <iostream>
 #include <string>
 
-void Log::logMessage(LogLevel logPriorityLevel, string * message) {
-	cout << logLevelAsString(logPriorityLevel) << ": " << message << endl;
+void Log::logMessage(std::string * message) {
+    logMessage(DEBUG, message);
+}
+void Log::logMessage(char const * message) {
+    logMessage(DEBUG, message);
+}
+void Log::logMessage(LogLevel logPriorityLevel, std::string * message) {
+    std::cout << logLevelAsString(logPriorityLevel) << ": " << message << std::endl;
 }
 void Log::logMessage(LogLevel logPriorityLevel, char const * message) {
-	cout << logLevelAsString(logPriorityLevel) << ": " << message << endl;
+    std::cout << logLevelAsString(logPriorityLevel) << ": " << message << std::endl;
 }
 void Log::printEndLine() {
-	cout << endl;
+    std::cout << std::endl;
 }
 void Log::logException(LogLevel logPriorityLevel, Exception & e) {
 	logMessage(logPriorityLevel, "Exception as string: ");
-	string * toString = e.toString();
+    std::string * toString = e.toString();
 	logMessage(logPriorityLevel, toString);
 	delete toString;
 }

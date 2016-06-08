@@ -1,34 +1,39 @@
 #ifndef BIOS_HPP_
 #define BIOS_HPP_
 
+#include "IBios.hpp"
 #include "BiosVector.hpp"
 #include "IBiosIO.hpp"
-#include "Patch.hpp"
-#include "logs/Log.hpp"
+#include "patch/Patch.hpp"
+#include "../logs/Log.hpp"
+#include "../concurrency/IReentrantLock.hpp"
 #include <vector>
-#include <mutex>
 
-class Bios {
+
+class Bios : public IBios {
 private:
-	Log * pLog;
+    ILog * pLog;
     IBiosIO * pBiosIO;
     IPatch * pPatch;
+    IBiosVector * pBiosBytesVector;
 
-    BiosVector biosBytesVector;
-    std::mutex lock;
+    IReentrantLock * pLock;
 public:
-    Bios(Log * pLog);
+    Bios();
 
+    void setLock(IReentrantLock * pLock);
+    void setLog(ILog * pLog);
     void setBiosIO(IBiosIO * pBiosIO);
     void setPatch(IPatch * pPatch);
+    void setBiosBytesVector(IBiosVector * pBiosBytesVector);
 
-	void read();
-    bool isReaded();
-	void write();
-	bool isInfected();
-	void infect();
-    void ensureInfected();
-    void clear();
+    virtual void read();
+    virtual bool isReaded();
+    virtual void write();
+    virtual bool isInfected();
+    virtual void infect();
+    virtual void ensureInfected();
+    virtual void clear();
 };
 
 #endif /* BIOS_HPP_ */

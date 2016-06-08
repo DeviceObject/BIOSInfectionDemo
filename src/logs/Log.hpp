@@ -1,18 +1,20 @@
 #ifndef LOG_HPP_
 #define LOG_HPP_
 
-#include<string>
-
 #include "../exceptions/Exception.hpp"
 #include "LogLevel.hpp"
-using namespace std;
+#include "ILog.hpp"
 
-class Log {
+#include<string>
+
+class Log : public ILog {
 public:
-	void logMessage(LogLevel logPriorityLevel, string * message);
-	void logMessage(LogLevel logPriorityLevel, char const * message);
-	void logException(LogLevel logPriorityLevel, Exception& e);
-	void printEndLine();
+    virtual void logMessage(std::string * message);
+    virtual void logMessage(char const * message);
+    virtual void logMessage(LogLevel logPriorityLevel, std::string * message);
+    virtual void logMessage(LogLevel logPriorityLevel, char const * message);
+    virtual void logException(LogLevel logPriorityLevel, Exception& e);
+    virtual void printEndLine();
 };
 
 #endif

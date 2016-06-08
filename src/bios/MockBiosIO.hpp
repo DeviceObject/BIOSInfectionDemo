@@ -1,15 +1,15 @@
-#ifndef BIOSIO_H
-#define BIOSIO_H
+#ifndef MOCKBIOSIO_HPP
+#define MOCKBIOSIO_HPP
 
 #include "IBiosIO.hpp"
 #include "../logs/ILog.hpp"
-#include<vector>
 
-class BiosIO : public IBiosIO {
+class MockBiosIO: public IBiosIO {
 private:
     ILog * pLog;
 public:
-    BiosIO();
+    MockBiosIO();
+
     void setLog(ILog * pLog);
 
     virtual char readBiosByte(int offset);
@@ -18,4 +18,4 @@ public:
     virtual void writeFromBytesArray(std::vector<char> bytes);
 };
 
-#endif // BIOSIO_H
+#endif // MOCKBIOSIO_HPP

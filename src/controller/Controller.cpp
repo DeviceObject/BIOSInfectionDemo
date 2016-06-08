@@ -10,7 +10,7 @@ Controller::Controller() {
 void Controller::setGui (Gui * pGui)  {
 	this->pGui = pGui;
 }
-void Controller::setBios (Bios * pBios)  {
+void Controller::setBios (IBios * pBios)  {
 	this->pBios = pBios;
 }
 void Controller::initGui() {

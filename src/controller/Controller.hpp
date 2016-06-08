@@ -8,11 +8,11 @@ class Gui;
 class Controller {
 private :
 	Gui * pGui;
-	Bios * pBios;
+    IBios * pBios;
 public:
 	Controller();
 	void setGui(Gui * pGui);
-	void setBios(Bios * pBios);
+    void setBios(IBios * pBios);
     void initGui();
 	void ensureBiosInfected();
 	virtual ~Controller();

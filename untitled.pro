@@ -27,7 +27,12 @@ SOURCES +=\
     src/bios/BiosVector.cpp \
     src/bios/BiosIO.cpp \
     src/exceptions/IllegalStateException.cpp \
-    src/bios/Patch.cpp
+    src/bios/patch/Patch.cpp \
+    src/bios/MockBios.cpp \
+    src/bios/MockBiosIO.cpp \
+    src/bios/MockBiosVector.cpp \
+    src/bios/patch/MockPatch.cpp \
+    src/concurrency/ReentrantLock.cpp
 
 HEADERS  += \
     src/controller/Controller.hpp \
@@ -43,8 +48,17 @@ HEADERS  += \
     src/bios/BiosVector.hpp \
     src/bios/BiosIO.hpp \
     src/exceptions/IllegalStateException.hpp \
-    src/bios/Patch.hpp \
     src/bios/IBiosIO.hpp \
-    src/bios/IPatch.hpp
+    src/bios/IBiosVector.hpp \
+    src/logs/ILog.hpp \
+    src/bios/patch/IPatch.hpp \
+    src/bios/patch/Patch.hpp \
+    src/bios/MockBios.hpp \
+    src/bios/IBios.hpp \
+    src/bios/MockBiosIO.hpp \
+    src/bios/MockBiosVector.hpp \
+    src/bios/patch/MockPatch.hpp \
+    src/concurrency/ReentrantLock.hpp \
+    src/concurrency/IReentrantLock.hpp
 
 FORMS    += mainwindow.ui

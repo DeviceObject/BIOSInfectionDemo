@@ -1,15 +1,17 @@
-#ifndef BIOSVECTOR_HPP
-#define BIOSVECTOR_HPP
+#ifndef MOCKBIOSVECTOR_H
+#define MOCKBIOSVECTOR_H
 
-#include"IBiosVector.hpp"
-#include<vector>
+#include "IBiosVector.hpp"
+#include "../logs/ILog.hpp"
 
-class BiosVector : public IBiosVector {
+class MockBiosVector : public IBiosVector {
 private:
-    std::vector<char> bytesVector;
-    bool modified;
+    ILog * pLog;
 public:
-    BiosVector();
+    MockBiosVector();
+
+    void setLog(ILog * pLog);
+
     virtual void init(std::vector<char> bytes);
     virtual void setAt(int i, char b);
     virtual char getAt(int i);
@@ -20,4 +22,4 @@ public:
     virtual void clear();
 };
 
-#endif // BIOSVECTOR_H
+#endif // MOCKBIOSVECTOR_H
